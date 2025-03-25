@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { toast } = useToast();
 
   const login = (email: string, password: string) => {
+    console.log("Login function called with:", email, password);
+    
     // Simple validation
     if (!email || !password) {
       toast({
@@ -44,10 +46,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Check if user exists in localStorage
     const users = JSON.parse(localStorage.getItem("users") || "[]");
+    console.log("Users from localStorage:", users);
+    
     const existingUser = users.find((u: User) => u.email === email);
+    console.log("Existing user found:", existingUser);
     
     if (existingUser) {
       // In a real app we would validate the password here
+      console.log("Setting user and auth state for existing user");
       setUser(existingUser);
       setIsAuthenticated(true);
       toast({
@@ -57,6 +63,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
     } else {
       // For the mock functionality, we'll create a user if not found
+      console.log("Creating new user for first-time login");
       const newUser: User = {
         email,
         firstName: "John",
@@ -64,6 +71,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         name: "John Doe",
         company: "Acme Inc"
       };
+      
+      // Force setting these values directly to localStorage as well
+      console.log("Setting user in state and localStorage");
+      localStorage.setItem("user", JSON.stringify(newUser));
+      localStorage.setItem("isAuthenticated", JSON.stringify(true));
+      
       setUser(newUser);
       setIsAuthenticated(true);
       
@@ -79,6 +92,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signup = (user: User, password: string) => {
+    console.log("Signup function called with user:", user);
+    
     // Simple validation
     if (!user.email || !password || !user.firstName || !user.lastName) {
       toast({
@@ -90,7 +105,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const users = JSON.parse(localStorage.getItem("users") || "[]");
+    console.log("Existing users:", users);
+    
     const existingUser = users.find((u: User) => u.email === user.email);
+    console.log("Found existing user?", existingUser);
     
     if (existingUser) {
       toast({
@@ -106,11 +124,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       ...user,
       name: `${user.firstName} ${user.lastName}`
     };
+    console.log("Created new user:", newUser);
     
-    // Save to localStorage
+    // Save to localStorage directly as well
+    console.log("Saving to localStorage directly");
+    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("isAuthenticated", JSON.stringify(true));
+    
+    // Save to users collection in localStorage
     localStorage.setItem("users", JSON.stringify([...users, newUser]));
     
     // Set as current user
+    console.log("Setting user state via hooks");
     setUser(newUser);
     setIsAuthenticated(true);
     

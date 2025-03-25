@@ -6,9 +6,16 @@ import NotFound from "@/pages/not-found";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import { useAuth } from "./contexts/AuthContext";
+import { useEffect } from "react";
 
 function Router() {
   const { isAuthenticated } = useAuth();
+  console.log("Router rendered, isAuthenticated:", isAuthenticated);
+
+  // Force a re-render when auth state changes
+  useEffect(() => {
+    console.log("Auth state changed, isAuthenticated:", isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <Switch>

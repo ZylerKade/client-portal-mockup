@@ -153,6 +153,24 @@ export default function AuthForm() {
             type="submit" 
             className="w-full" 
             disabled={isSubmitting}
+            onClick={(e) => {
+              console.log("Sign in button clicked manually");
+              if (!isSubmitting) {
+                e.preventDefault();
+                // Get form values directly
+                const email = loginForm.getValues("email");
+                const password = loginForm.getValues("password");
+                console.log("Manually submitting with:", email, password);
+                
+                if (email && password) {
+                  setIsSubmitting(true);
+                  setTimeout(() => {
+                    login(email, password);
+                    setIsSubmitting(false);
+                  }, 800);
+                }
+              }
+            }}
           >
             {isSubmitting ? (
               <span className="flex items-center">
@@ -279,6 +297,29 @@ export default function AuthForm() {
           type="submit" 
           className="w-full"
           disabled={isSubmitting}
+          onClick={(e) => {
+            console.log("Create account button clicked manually");
+            if (!isSubmitting) {
+              e.preventDefault();
+              // Get form values directly
+              const formValues = signupForm.getValues();
+              console.log("Manually submitting signup with:", formValues);
+              
+              if (formValues.email && formValues.password && formValues.firstName && formValues.lastName) {
+                setIsSubmitting(true);
+                setTimeout(() => {
+                  const user: User = {
+                    firstName: formValues.firstName,
+                    lastName: formValues.lastName,
+                    company: formValues.company,
+                    email: formValues.email
+                  };
+                  signup(user, formValues.password);
+                  setIsSubmitting(false);
+                }, 800);
+              }
+            }
+          }}
         >
           {isSubmitting ? (
             <span className="flex items-center">
