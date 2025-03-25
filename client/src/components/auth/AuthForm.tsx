@@ -57,6 +57,7 @@ export default function AuthForm() {
 
   // Handle login form submission
   const onLoginSubmit = (data: LoginFormValues) => {
+    console.log("Login form submitted with data:", data);
     setIsSubmitting(true);
     // Simulate network request
     setTimeout(() => {
@@ -67,6 +68,7 @@ export default function AuthForm() {
 
   // Handle signup form submission
   const onSignupSubmit = (data: SignupFormValues) => {
+    console.log("Signup form submitted with data:", data);
     setIsSubmitting(true);
     // Simulate network request
     setTimeout(() => {
@@ -84,7 +86,10 @@ export default function AuthForm() {
   if (isLoginMode) {
     return (
       <Form {...loginForm}>
-        <form className="space-y-5" onSubmit={loginForm.handleSubmit(onLoginSubmit)}>
+        <form className="space-y-5" onSubmit={(e) => {
+          e.preventDefault();
+          loginForm.handleSubmit(onLoginSubmit)(e);
+        }}>
           <FormField
             control={loginForm.control}
             name="email"
@@ -168,7 +173,10 @@ export default function AuthForm() {
 
   return (
     <Form {...signupForm}>
-      <form className="space-y-5" onSubmit={signupForm.handleSubmit(onSignupSubmit)}>
+      <form className="space-y-5" onSubmit={(e) => {
+        e.preventDefault();
+        signupForm.handleSubmit(onSignupSubmit)(e);
+      }}>
         <div className="grid grid-cols-2 gap-4">
           <FormField
             control={signupForm.control}
