@@ -2,7 +2,7 @@
 
 A modern client portal dashboard application demonstrating frontend development skills with authentication, dashboard UI, and mock functionality.
 
-![Client Portal Screenshot](https://i.imgur.com/YourScreenshotURL.png)
+You can see a live version of this Client Portal at https://portal-demo.solomain.com
 
 ## 🚀 Features
 
