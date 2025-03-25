@@ -7,6 +7,7 @@ import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import { useAuth } from "./contexts/AuthContext";
 import { useState, useEffect } from "react";
+import { PortfolioBanner } from "@/components/ui/portfolio-banner";
 
 // Simplified direct authentication check for mockup
 function useSimpleAuth() {
@@ -56,7 +57,12 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
+      <div className="flex flex-col min-h-screen">
+        <PortfolioBanner />
+        <div className="flex-1">
+          <Router />
+        </div>
+      </div>
       <Toaster />
     </QueryClientProvider>
   );
