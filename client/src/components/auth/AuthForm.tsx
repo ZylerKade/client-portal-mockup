@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "../../contexts/AuthContext";
 import { User } from "../../types";
+import { LoginButton } from "./LoginButton";
 
 // Form schemas
 const loginSchema = z.object({
@@ -184,6 +185,12 @@ export default function AuthForm() {
               'Sign in'
             )}
           </Button>
+          
+          {/* Direct login button as fallback */}
+          <LoginButton 
+            email={loginForm.getValues("email")} 
+            password={loginForm.getValues("password")} 
+          />
         </form>
       </Form>
     );
