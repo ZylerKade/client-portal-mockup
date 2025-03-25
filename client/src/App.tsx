@@ -55,6 +55,16 @@ function Router() {
 }
 
 function App() {
+  // Clear authentication on initial load to ensure user starts at login screen
+  useEffect(() => {
+    // Only clear auth if URL has no special parameters
+    if (window.location.search === '') {
+      console.log("App mounted - clearing authentication to show login screen");
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("user");
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex flex-col min-h-screen">
