@@ -151,25 +151,47 @@ export default function AuthForm() {
           />
 
           <Button 
-            type="submit" 
+            type="button" 
             className="w-full" 
             disabled={isSubmitting}
-            onClick={(e) => {
-              console.log("Sign in button clicked manually");
-              if (!isSubmitting) {
-                e.preventDefault();
-                // Get form values directly
-                const email = loginForm.getValues("email");
-                const password = loginForm.getValues("password");
-                console.log("Manually submitting with:", email, password);
+            onClick={() => {
+              console.log("Sign in button clicked");
+              const email = loginForm.getValues("email");
+              const password = loginForm.getValues("password");
+              console.log("Submitting with:", email, password);
+              
+              if (email && password) {
+                setIsSubmitting(true);
                 
-                if (email && password) {
-                  setIsSubmitting(true);
-                  setTimeout(() => {
+                // For demo purposes, we're using setTimeout to simulate a network request
+                setTimeout(() => {
+                  try {
+                    // Direct approach: set localStorage directly for mockup
+                    console.log("Setting localStorage directly");
+                    localStorage.setItem("isAuthenticated", "true");
+                    
+                    // Create mock user
+                    const mockUser = {
+                      email: email,
+                      firstName: "John",
+                      lastName: "Doe",
+                      name: "John Doe",
+                      company: "Acme Inc"
+                    };
+                    localStorage.setItem("user", JSON.stringify(mockUser));
+                    
+                    // Call login for context update
                     login(email, password);
+                    
+                    console.log("Login successful, redirecting...");
+                    // Force redirect for mockup
+                    window.location.reload();
+                  } catch (error) {
+                    console.error("Login error:", error);
+                  } finally {
                     setIsSubmitting(false);
-                  }, 800);
-                }
+                  }
+                }, 800);
               }
             }}
           >
@@ -185,12 +207,6 @@ export default function AuthForm() {
               'Sign in'
             )}
           </Button>
-          
-          {/* Direct login button as fallback */}
-          <LoginButton 
-            email={loginForm.getValues("email")} 
-            password={loginForm.getValues("password")} 
-          />
         </form>
       </Form>
     );
@@ -301,30 +317,44 @@ export default function AuthForm() {
         />
 
         <Button 
-          type="submit" 
+          type="button" 
           className="w-full"
           disabled={isSubmitting}
-          onClick={(e) => {
-            console.log("Create account button clicked manually");
-            if (!isSubmitting) {
-              e.preventDefault();
-              // Get form values directly
-              const formValues = signupForm.getValues();
-              console.log("Manually submitting signup with:", formValues);
-              
-              if (formValues.email && formValues.password && formValues.firstName && formValues.lastName) {
-                setIsSubmitting(true);
-                setTimeout(() => {
+          onClick={() => {
+            console.log("Create account button clicked");
+            const formValues = signupForm.getValues();
+            console.log("Manually submitting signup with:", formValues);
+            
+            if (formValues.email && formValues.password && formValues.firstName && formValues.lastName) {
+              setIsSubmitting(true);
+              setTimeout(() => {
+                try {
+                  // Create user
                   const user: User = {
                     firstName: formValues.firstName,
                     lastName: formValues.lastName,
                     company: formValues.company,
-                    email: formValues.email
+                    email: formValues.email,
+                    name: `${formValues.firstName} ${formValues.lastName}`
                   };
+                  
+                  // Direct approach: set localStorage directly
+                  console.log("Setting user directly in localStorage");
+                  localStorage.setItem("isAuthenticated", "true");
+                  localStorage.setItem("user", JSON.stringify(user));
+                  
+                  // Call signup for any context updates
                   signup(user, formValues.password);
+                  
+                  console.log("Signup successful, redirecting...");
+                  // Force redirect for mockup
+                  window.location.reload();
+                } catch (error) {
+                  console.error("Signup error:", error);
+                } finally {
                   setIsSubmitting(false);
-                }, 800);
-              }
+                }
+              }, 800);
             }
           }}
         >

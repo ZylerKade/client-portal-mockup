@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthContextType>({
   toggleAuthMode: () => {}
 });
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): AuthContextType => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useLocalStorage<boolean>("isAuthenticated", false);
