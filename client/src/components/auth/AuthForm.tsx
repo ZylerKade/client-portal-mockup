@@ -180,12 +180,19 @@ export default function AuthForm() {
                     };
                     localStorage.setItem("user", JSON.stringify(mockUser));
                     
-                    // Call login for context update
-                    login(email, password);
+                    // Skip context update since it might be causing issues
+                    console.log("Login successful via direct localStorage, redirecting...");
                     
-                    console.log("Login successful, redirecting...");
-                    // Force redirect for mockup
-                    window.location.reload();
+                    // Fire a custom event to notify other components
+                    const authEvent = new CustomEvent("auth-change", { 
+                      detail: { action: "login", user: mockUser } 
+                    });
+                    window.dispatchEvent(authEvent);
+                    
+                    // Add a small delay before refresh
+                    setTimeout(() => {
+                      window.location.href = "/";
+                    }, 100);
                   } catch (error) {
                     console.error("Login error:", error);
                   } finally {
@@ -343,12 +350,19 @@ export default function AuthForm() {
                   localStorage.setItem("isAuthenticated", "true");
                   localStorage.setItem("user", JSON.stringify(user));
                   
-                  // Call signup for any context updates
-                  signup(user, formValues.password);
+                  // Skip context updates
+                  console.log("Signup successful via direct localStorage, redirecting...");
                   
-                  console.log("Signup successful, redirecting...");
-                  // Force redirect for mockup
-                  window.location.reload();
+                  // Fire a custom event to notify other components
+                  const authEvent = new CustomEvent("auth-change", { 
+                    detail: { action: "login", user: user } 
+                  });
+                  window.dispatchEvent(authEvent);
+                  
+                  // Add a small delay before redirect
+                  setTimeout(() => {
+                    window.location.href = "/";
+                  }, 100);
                 } catch (error) {
                   console.error("Signup error:", error);
                 } finally {
