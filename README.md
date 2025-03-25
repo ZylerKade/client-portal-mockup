@@ -43,7 +43,7 @@ npm install
 npm run dev
 ```
 
-4. Open [http://localhost:5000](http://localhost:5000) in your browser to see the application.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## 📱 Usage
 
@@ -104,23 +104,6 @@ client-portal-mvp/
 └── package.json            # Project dependencies
 ```
 
-## 🖼️ Screenshots
-
-### Login Page
-
-![Login Page](https://i.imgur.com/YourLoginScreenshotURL.png)
-
-### Dashboard
-
-![Dashboard](https://i.imgur.com/YourDashboardScreenshotURL.png)
-
-### File Management
-
-![File Management](https://i.imgur.com/YourFilesScreenshotURL.png)
-
-### Messaging
-
-![Messaging](https://i.imgur.com/YourMessagingScreenshotURL.png)
 
 ## 🔄 Data Persistence
 
@@ -153,9 +136,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 This project was created as a portfolio piece. If you're looking for a developer to build similar applications, please contact me:
 
-- Website: [https://solomain.com](https://solomain.com)
+- Website: [https://monetaized.com](https://monetaized.com)
 - Upwork: [https://solomain.com/upwork](https://solomain.com/upwork)
-- GitHub: [https://github.com/yourusername](https://github.com/yourusername)
+- GitHub: [https://github.com/zylerkade](https://github.com/zylerkade)
 
 ---
 
