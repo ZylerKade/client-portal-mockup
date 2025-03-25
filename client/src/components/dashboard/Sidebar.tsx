@@ -93,7 +93,19 @@ export default function Sidebar({ activeSection, onSectionChange, isMobileOpen, 
             <li>
               <button 
                 className="w-full px-4 py-2 flex items-center text-left text-slate-300 hover:bg-slate-800 rounded-md"
-                onClick={logout}
+                onClick={() => {
+                  // Clear auth state in localStorage directly
+                  console.log("Sign out clicked");
+                  localStorage.removeItem("isAuthenticated");
+                  localStorage.removeItem("user");
+                  
+                  // Call context logout for compatibility
+                  if (logout) logout();
+                  
+                  // Force redirect to login page
+                  console.log("Redirecting to login page...");
+                  window.location.href = "/";
+                }}
               >
                 <i className="ri-logout-box-line mr-3"></i>
                 <span>Sign Out</span>
