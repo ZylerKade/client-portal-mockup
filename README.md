@@ -1,6 +1,6 @@
 # Client Portal Demo
 
-A modern client portal dashboard application demonstrating frontend development skills with authentication, dashboard UI, and mock functionality.
+A modern client portal dashboard application demonstrating a web app with login logic, dashboard UI, and mock file handling. This demo web app mimics a client-facing system, using local mock data and state to demonstrate functionality without real authentication or file storage.
 
 You can see a live version of this Client Portal at https://portal-demo.solomain.com
 
