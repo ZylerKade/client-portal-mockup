@@ -1,4 +1,4 @@
-# Client Portal MVP
+# Client Portal Demo
 
 A modern client portal dashboard application demonstrating frontend development skills with authentication, dashboard UI, and mock functionality.
 
